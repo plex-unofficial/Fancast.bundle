@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site site="http://www.fancast.com/.*2.35x1"
+       plugin="http://www.fancast.com/.*/swf/FCVidContainerInit.swf"
+       initialState="playing"
+                        version="1.0">
+                        
+        <crop x="22" y="92" width="916" height='388' />
+
+	<seekbar type="thumb">
+		<start x="86" y="621" />
+		<end   x="634" y="621" />
+		<played>
+                    <color op='brighter-than' rgb="8cc643" />
+		</played>
+	</seekbar>
+
+<!-- Set Colors for Paused Video -->
+    <condition name="paused">
+			<and>
+				<color x="41"  y="495" rgb="ffffff" />
+            </and>
+	</condition>
+    
+<!-- PLAYING -->
+	<state name="playing">
+		
+<!-- Click to pause -->
+		<event>
+			<condition>
+				<command name="pause" />
+			</condition>
+			<action>
+				<click x="42" y="495" />
+			</action>
+		</event>
+
+<!-- Detect paused video -->
+		<event>
+			<condition>
+				<condition name="paused" />
+			</condition>
+			<action>
+				<goto state="paused" />
+			</action>
+		</event>
+		
+		<!-- Video ends -->
+		<event>
+			<condition>
+				<color x="815" y="600" rgb="ece400" />
+			</condition>
+			<action>
+			  <pause time="2000" />
+				<goto state="end" />
+			</action>
+		</event>
+	</state>
+	
+<!-- PAUSED -->
+	<state name="paused">
+		<event>
+			<condition>
+				<command name="play" />
+			</condition>
+			<action>
+				<click x="42" y="495" />
+			</action>
+		</event>
+        		
+<!-- Go To Playing -->
+		<event>
+			<condition>
+				<not>
+					<condition name="paused" />
+				</not>
+			</condition>
+			<action>
+				<goto state="playing" />
+            </action>
+        </event>
+        
+	</state>
+        
+</site>

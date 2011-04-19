@@ -1,0 +1,20 @@
+{
+  "fancast" : "Fancast",
+  "episodes"  : "Full TV Episodes",
+  "tv" : "Full TV Episodes",
+  "movies" : "Movies",
+  "trailers" : "Trailers",
+  "clips" : "Clips",
+  "pageNumberPrefix" : "Page",
+  "filterGenre" : "Genre",
+  "filterNetwork" : "Network",
+  "top5" : "Top Five",
+  "all" : "All",
+  "allclips" : "See all clips",
+  "alltrailerclips" : "See all clips and trailers",
+  "showcaseClip" : "Showcase Clip",
+  "newEpisodes" : "New Episodes",
+  "showAllEpisodes" : "Show All Episodes",
+  "spotlight" : "In The Spotlight",
+  "noinitialcache" : "The Fancast plugin is initialising\nPlease come back in a few minutes"
+}

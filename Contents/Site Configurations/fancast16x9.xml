@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site site="http://www.fancast.com/.*16x9"
+       plugin="http://www.fancast.com/.*/swf/FCVidContainerInit.swf"
+       initialState="playing"
+                        version="1.0">
+                        
+        <crop x="22" y="92" width="916" height='515' />
+
+	<seekbar type="thumb">
+		<start x="86" y="621" />
+		<end   x="634" y="621" />
+		<played>
+                    <color op='brighter-than' rgb="8cc643" />
+		</played>
+	</seekbar>
+
+<!-- Set Colors for Paused Video -->
+    <condition name="paused">
+			<and>
+				<color x="41"  y="623" rgb="ffffff" />
+            </and>
+	</condition>
+    
+<!-- PLAYING -->
+	<state name="playing">
+		
+<!-- Click to pause -->
+		<event>
+			<condition>
+				<command name="pause" />
+			</condition>
+			<action>
+				<click x="42" y="621" />
+			</action>
+		</event>
+
+<!-- Detect paused video -->
+		<event>
+			<condition>
+				<condition name="paused" />
+			</condition>
+			<action>
+				<goto state="paused" />
+			</action>
+		</event>
+
+<!-- Detect 'what to watch next' and dismiss it -->
+
+<event>
+  <condition>
+   <!-- Look for the white border around the image thumbnail -->
+    <!-- Hopefully it doesn't matter if we trigger too often -->
+<and>
+  <!--  <color x='87' y='526' rgb='ffffff' />
+    <color x='116' y='526' rgb='ffffff' /> -->
+    <color x='87' y='505' rgb='ffffff' />
+    <color x='116' y='505' rgb='ffffff' />
+
+</and>
+    
+  </condition>
+  <action>
+    <pause time="2000" />
+   <click x='333' y='502' />
+  </action>
+ </event>
+		
+		<!-- Video ends -->
+		<event>
+			<condition>
+				<color x="815" y="600" rgb="ece400" />
+			</condition>
+			<action>
+			  <pause time="2000" />
+				<goto state="end" />
+			</action>
+		</event>
+	</state>
+	
+<!-- PAUSED -->
+	<state name="paused">
+		<event>
+			<condition>
+				<command name="play" />
+			</condition>
+			<action>
+				<click x="42" y="623" />
+			</action>
+		</event>
+        		
+<!-- Go To Playing -->
+		<event>
+			<condition>
+				<not>
+					<condition name="paused" />
+				</not>
+			</condition>
+			<action>
+				<goto state="playing" />
+            </action>
+        </event>
+        
+	</state>
+        
+</site>

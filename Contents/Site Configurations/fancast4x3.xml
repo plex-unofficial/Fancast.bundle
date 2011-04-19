@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site site="http://www.fancast.com/.*4x3"
+       plugin="http://www.fancast.com/.*/swf/FCVidContainerInit.swf"
+       initialState="playing"
+                        version="1.0">
+
+<!--
+
+Cookie	__qca=4a327048-0a278-fb33f-8eedd; __qcb=1314319249; CLEQ_a=2abbf6bd051041f38ea785f420470000.16; CLEQ_t=1; CLEQ_y=9; cn=n; s_cc=true; s_lastVisit=7/2009; s_sq=%5B%5BB%5D%5D; s_vistedLastMonth=6/2009
+
+-->
+<!--
+
+<setCookie domain=".fancast.com" path="/" name="__qca" secure="false" value="x"/>
+<setCookie domain=".fancast.com" path="/" name="__qcb" secure="false" value="x"/>
+<setCookie domain=".fancast.com" path="/" name="CLEQ_a" secure="false" value="x"/>
+<setCookie domain=".fancast.com" path="/" name="CLEQ_t" secure="false" value="x"/>
+<setCookie domain=".fancast.com" path="/" name="CLEQ_y" secure="false" value="x"/>
+<setCookie domain=".fancast.com" path="/" name="cn" secure="false" value="x"/>
+<setCookie domain=".fancast.com" path="/" name="s_cc" secure="false" value="x"/>
+<setCookie domain=".fancast.com" path="/" name="s_lastVisit" secure="false" value="x"/>
+<setCookie domain=".fancast.com" path="/" name="s_sq" secure="false" value="x"/>
+<setCookie domain=".fancast.com" path="/" name="s_vistedLastMonth" secure="false" value="x"/>
+-->
+
+                        
+        <crop x="137" y="92" width="686" height='516' />
+
+	<seekbar type="thumb">
+
+		<start x="86" y="623" />
+		<end   x="634" y="623" />
+		<played>
+                   <color op='brighter-than' rgb="e3e3e3" /> 
+                 <!--      <color rgb="e7e7e7" />-->
+		</played>
+	</seekbar>
+
+<!-- ededed
+     e7e7e7
+     f3f3f3 -->
+
+<!-- Set Colors for Paused Video -->
+    <condition name="paused">
+			<and>
+				<color x="41"  y="623" rgb="ffffff" />
+            </and>
+	</condition>
+    
+<!-- PLAYING -->
+	<state name="playing">
+	        <run script="function postOverlay() {}"/>
+	
+<!-- Click to pause -->
+		<event>
+			<condition>
+				<command name="pause" />
+			</condition>
+			<action>
+				<click x="42" y="621" />
+			</action>
+		</event>
+
+<!-- Detect paused video -->
+		<event>
+			<condition>
+				<condition name="paused" />
+			</condition>
+			<action>
+				<goto state="paused" />
+			</action>
+		</event>
+
+<!-- Detect 'what to watch next' and dismiss it -->
+
+   <!-- Look for the white border around the image thumbnail -->
+    <!-- Hopefully it doesn't matter if we trigger too often -->
+<!--
+<event>
+  <condition>
+<and>
+    <color x='166' y='505' rgb='ffffff' />
+    <color x='198' y='505' rgb='ffffff' />
+</and>
+   
+  </condition>
+  <action>
+   <pause time="500" />
+   <click x='448' y='502' />
+   <pause time="500" />
+   <click x='448' y='502' />
+   <pause time="2000" />
+   <click x='448' y='502' />
+  </action>
+ </event>
+
+-->
+		
+		<!-- Video ends -->
+		<event>
+			<condition>
+				<color x="815" y="600" rgb="ece400" />
+			</condition>
+			<action>
+			  <pause time="2000" />
+				<goto state="end" />
+			</action>
+		</event>
+	</state>
+	
+<!-- PAUSED -->
+	<state name="paused">
+		<event>
+			<condition>
+				<command name="play" />
+			</condition>
+			<action>
+				<click x="42" y="623" />
+			</action>
+		</event>
+        		
+<!-- Go To Playing -->
+		<event>
+			<condition>
+				<not>
+					<condition name="paused" />
+				</not>
+			</condition>
+			<action>
+				<goto state="playing" />
+            </action>
+        </event>
+        
+	</state>
+        
+</site>
